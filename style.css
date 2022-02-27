@@ -1,3 +1,13 @@
 #container {
     display: grid;
+    grid-gap: 1em;
+}
+
+.cell{
+    padding: 1em;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+    aspect-ratio: 1;
 }
