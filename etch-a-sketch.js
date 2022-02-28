@@ -7,18 +7,36 @@ cols = 16;
 createGrid(rows, cols);
 
 function createGrid(rows, cols) {
+
     for (c = 0; c < rows*cols; c++) {
         const cell = document.createElement('div');
         cell.classList.add('cell');
         container.appendChild(cell);
         cell.addEventListener('mouseover', () => {
-            cell.style['background-color'] = 'blue';
+            hover(cell);
         })
     }
 
     // container.style['grid-template-rows'] = Array(rows).fill('auto').join(' ');
 
     container.style['grid-template-columns'] = Array(cols).fill('auto').join(' ');    
+}
+
+function hover(cell) {
+    const style = getComputedStyle(cell);
+    const opacity = style['opacity'];
+
+    if (style['background-color'] == 'rgba(0, 0, 0, 0)') {
+        
+        cell.style['background-color'] = getRandomColor();
+
+        cell.style['opacity'] = '0.2';
+
+    } else {
+        if (parseFloat(opacity) < 1) {
+            cell.style['opacity'] = (parseFloat(opacity) + 0.1).toString();
+        }
+    }
 }
 
 
@@ -36,3 +54,12 @@ function clearGrid() {
         container.removeChild(container.firstChild);
     }  
 }
+
+function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
